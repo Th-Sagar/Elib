@@ -148,7 +148,10 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 
 const listBook = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const book = await BookModel.find();
+    const book = await BookModel.find().populate("author", "name");
+    // const book = await BookModel.find().populate("author", "name email");
+
+    //populate helps to show the related data from the user collection link in the model with the ref and the fields to show
 
     res.json(book);
   } catch (error) {
@@ -163,7 +166,10 @@ const getSingleBook = async (
 ) => {
   try {
     const bookId = req.params.bookId;
-    const book = await BookModel.findOne({ _id: bookId });
+    const book = await BookModel.findOne({ _id: bookId }).populate(
+      "author",
+      "name"
+    );
     if (!book) return next(createHttpError(404, "Book not found"));
 
     res.json(book);

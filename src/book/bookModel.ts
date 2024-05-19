@@ -9,6 +9,7 @@ const bookSchema = new mongoose.Schema<Book>(
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     coverImage: {
@@ -29,6 +30,6 @@ const bookSchema = new mongoose.Schema<Book>(
   }
 );
 
-const BookModel = mongoose.model("Book", bookSchema);
+const BookModel = mongoose.model<Book>("Book", bookSchema);
 
 export default BookModel;
