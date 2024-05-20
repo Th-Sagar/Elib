@@ -4,6 +4,8 @@ import userRouter from "./user/userRouter";
 import bookRouter from "./book/bookRouter";
 import cors from "cors";
 import { config } from "./config/config";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger-output.json";
 const app = express();
 app.use(
   cors({
@@ -12,6 +14,8 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/users", userRouter);
 app.use("/api/books", bookRouter);
