@@ -9,7 +9,7 @@ import swaggerDocument from "./swagger-output.json";
 const app = express();
 app.use(
   cors({
-    origin: config.frontendDomain,
+    origin: true,
   })
 );
 
